@@ -1,0 +1,10 @@
+ej3- hill climbing me dio 0,000000 y simulated anealling 0,004883790802376
+ej4-
+hill climbing= me dio 0,000000
+simulated anealling= 0,003475195470118
+b- Por como lo hice no fallo pero si lo iniciaramos por ejemplo en un punto 
+donde ya paso el maximo global nos quedariamos cn uno local nada mas
+c- Luego de realizar varias pruebas pude notar que si aumentamos la temperatura
+de inicio el resultado va a ser mas preciso. Y aunque la temperatura no sea 
+tan alta si aumentamos la cantidad de iteraciones tambien podemos obtener un
+resultado un poco mas preciso
