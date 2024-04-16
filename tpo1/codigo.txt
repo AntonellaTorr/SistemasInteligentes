@@ -1,0 +1,136 @@
+
+import sys
+
+def best_neighbor_func(current_move):
+    '''
+    this function return the following:
+        - best_neighbor: the movement that is the best option to keep doing
+        - best_value: the heuristic value attached to the best neighbor
+        - current_value: the heuristic value of the current movement been done
+
+    the heuristic value is a 0 to 1 rate, where 1 means the safest state possible and
+    0 means in complete danger.
+    '''
+
+    # take coordinates from us and the enemy state
+    my_x =  current['x']
+    my_y = current['y']
+    
+    #default value for the returns
+    best_neighbor = ''
+    best_value = -1
+    current_value = -1
+        
+    # arrays created for generic operations over for sentence
+    movements = ['LEFT','UP','RIGHT','DOWN']
+    tuple=[my_x,my_y]
+    limit=[29,19] # down and right limits of the map
+    mult=[-1,-1,1,1]
+
+    # get the inverse of the current state and
+    # delete it and its information from the array
+    index = (movements.index(move)+2) % 4
+    movements[index] = 'none'
+
+    #heuristical value for each movement
+    for i in range(4):
+
+        # if movement is deteled, the heuristical value isn't calculated
+        if movements[i] == 'none':
+            continue  
+        value = 0        
+
+        # tuple (x,y) with the coordinates to compare
+        tuple_to_compare = []
+        tuple_to_compare.append(tuple[(i+1)%2])
+        tuple_to_compare.insert(i%2,tuple[i%2])
+        
+        # simulate the next 5 movements. If it doesnt detect collision, value is 1.
+        pass_flag = False
+        for j in range(1,6):
+            
+            #simulates a pixel movement in the tuple to compare
+            tuple_to_compare[i%2] += mult[i]
+            
+            # if the tuple to compare check colission with me or the enemy, it activates
+            #the pass flag
+            if (tuple_to_compare in enemy_pass
+             or tuple_to_compare in me_pass):
+                pass_flag = True
+            
+            # if the not condition satisfies, a safety point is added to the heuristical value
+            if not(tuple[i%2] + mult[i]*j <= 0  
+             or tuple[i%2] + mult[i]*j >= limit[i%2]
+             or pass_flag):
+                value += 1
+
+        # if the movement is the current move(state),its value is calculated.
+        if(movements[i] == move):
+            current_value = value
+
+        # analyze if we have found the best neighbor and value
+        if value > best_value:
+            best_neighbor = movements[i]
+            best_value = value
+
+    return best_neighbor,best_value/5,current_value/5
+
+
+
+# GAME LOOP
+move = 'LEFT'
+print(move)
+
+# lists that save the positions where the enemy and me bodies are 
+enemy_pass=[]
+me_pass=[]
+
+while True:
+    # n: total number of players (2 to 4).
+    # p: your player number (0 to 3).
+    n, p = [int(i) for i in input().split()]
+    x1s = []
+    y1s = []
+    for i in range(n):
+        # x0: starting X coordinate of lightcycle (or -1)
+        # y0: starting Y coordinate of lightcycle (or -1)
+        # x1: starting X coordinate of lightcycle (can be the same as X0 if you play before this player)
+        # y1: starting Y coordinate of lightcycle (can be the same as Y0 if you play before this player)
+        x0, y0, x1, y1 = [int(j) for j in input().split()]
+        x1s.append(x1)
+        y1s.append(y1)
+        print("P",i,": pos actual ",x1,y1, file=sys.stderr, flush=True)
+
+    #current state of our player and the enemy
+    current = {'x':x1s[0],'y':y1s[0],'move':move}
+    enemy = {'x':x1s[1],'y':y1s[1]}
+
+    #save the current position of the player and the enemy
+    me_pass.append([x1s[0],y1s[0]])
+    enemy_pass.append([x1s[1],y1s[1]])
+
+    #default assignment of values that will be returned by the heuristic
+    best_neighbor=0
+    best_value=0
+    current_value=0
+
+    #invoke the heuristic
+    best_neighbor,best_value,current_value = best_neighbor_func(current['move'])
+    
+    print('best value: ',best_value, file=sys.stderr, flush=True)
+    print('current value: ',current_value, file=sys.stderr, flush=True)
+    print('best_neighbor: ',best_neighbor, file=sys.stderr, flush=True)
+
+    #choose the next movement
+    if best_value > current_value:
+        move = best_neighbor
+    print(move)
+
+
+        
+
+
+
+
+        
+

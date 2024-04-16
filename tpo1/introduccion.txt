@@ -1,0 +1,19 @@
+En el ámbito de la optimización y la inteligencia artificial, los algoritmos de búsqueda local 
+juegan un papel fundamental al enfrentar problemas de complejidad significativa. En estos problemas, 
+la exploración exhaustiva de todas las posibles soluciones se torna inviable. 
+Dentro de esta categoría, dos algoritmos sobresalen el Hill Climbing y el Simulated Annealing.
+ Estas técnicas son de gran utilidad para encontrar
+ soluciones aceptables, o incluso óptimas, al concentrarse en regiones específicas del espacio de búsqueda.
+Gracias a esto, ofrecen así una alternativa eficaz cuando la búsqueda completa resulta impracticable.
+
+El Hill Climbing, inspirado en la analogía de escalar una colina, se centra en encontrar soluciones óptimas
+ locales mediante movimientos ascendentes o descendentes que maximizan o minimizan una función objetivo. 
+Aunque es una técnica simple y de rápida implementación, su principal limitación radica en su propensión a 
+quedar atrapado en óptimos locales, lo que dificulta encontrar soluciones óptimas globales.
+
+Por otro lado, el Simulated Annealing (basado en el proceso físico del recocido simulado en metalurgia) 
+ofrece una solución a esta problemática. Este algoritmo es capaz de definir la probabilidad de aceptar peores soluciones
+en funcion de en que etapa de la busqueda se encuentre.Por esto, el Simulated Annealing puede evitar quedarse estancado en óptimos locales y
+ explorar más ampliamente el espacio de búsqueda en busca de soluciones óptimas globales o cercanas a ellas.
+ La investigación y comprensión de estos algoritmos son fundamentales para abordar eficazmente una amplia gama 
+de problemas de optimización en diversos campos de aplicación.
